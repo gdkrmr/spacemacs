@@ -9,15 +9,15 @@
   - [[#features][Features:]]
 - [[#install][Install]]
 - [[#key-bindings][Key bindings]]
+  - [[#editing][Editing]]
+  - [[#repl][Repl]]
 
 * Description
-This layer adds support for something.
+This layer adds support for [[https://julialang.org][Julia]] to Spacemacs.
 
 ** Features:
-  - Autocomplete
-  - Lint
-  - Refactor
-  - ...
+  - Syntax highlighting
+  - Repl support
 
 * Install
 To use this configuration layer, add it to your =~/.spacemacs=. You will need to
@@ -25,11 +25,24 @@ add =julia= to the existing =dotspacemacs-configuration-layers= list in this
 file.
 
 * Key bindings
+| Key Binding | Description                                          |
+|-------------+------------------------------------------------------|
+| ~SPC m h h~ | Calls ~@doc~ macro on symbol under cursor.           |
+| ~SPC m e m~ | Expands macro under cursor.                          |
+| ~SPC m w~   | Calls ~workspace()~ in Repl to give clean namespace. |
+| ~SPC e l~   | Expands latex macro (e.g. =\delta=).                 |
+** Editing
+| Key Binding | Description                                               |
+|-------------+-----------------------------------------------------------|
+| ~SPC m s b~ | Sends buffer to REPL                                      |
+| ~SPC m s l~ | Sends line to REPL                                        |
+| ~SPC m s r~ | Sends region to REPL                                      |
+| ~SPC m ,~   | Brings up Julia Repl (starts new one or focuses existing) |
 
-| Key Binding | Description    |
-|-------------+----------------|
-| ~SPC x x x~ | Does thing01   |
-
+** Repl
+| Key Binding | Description   |
+|-------------+---------------|
+| ~SPC m '~   | Edit current. |
 # Use GitHub URLs if you wish to link a Spacemacs documentation file or its heading.
 # Examples:
 # [[https://github.com/syl20bnr/spacemacs/blob/master/doc/VIMUSERS.org#sessions]]
