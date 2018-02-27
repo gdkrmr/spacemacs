@@ -2,61 +2,55 @@
 ;;
 ;; Copyright (c) 2012-2018 Sylvain Benner & Contributors
 ;;
-;; Author: Adam <adam@becomewind>
+;; Author: Adam Beckmeyer <adam_git@thebeckmeyers.xyz>
 ;; URL: https://github.com/syl20bnr/spacemacs
 ;;
 ;; This file is not part of GNU Emacs.
 ;;
 ;;; License: GPLv3
 
-;;; Commentary:
-
-;; See the Spacemacs documentation and FAQs for instructions on how to implement
-;; a new layer:
-;;
-;;   SPC h SPC layers RET
-;;
-;;
-;; Briefly, each package to be installed or configured by this layer should be
-;; added to `julia-packages'. Then, for each package PACKAGE:
-;;
-;; - If PACKAGE is not referenced by any other Spacemacs layer, define a
-;;   function `julia/init-PACKAGE' to load and initialize the package.
-
-;; - Otherwise, PACKAGE is already referenced by another Spacemacs layer, so
-;;   define the functions `julia/pre-init-PACKAGE' and/or
-;;   `julia/post-init-PACKAGE' to customize the package as it is loaded.
-
-;;; Code:
-
 (defconst julia-packages
-  '()
-  "The list of Lisp packages required by the julia layer.
+  '(
+    (julia-mode :location elpa)
+    (julia-repl :location elpa)
+    ))
 
-Each entry is either:
+(defun julia/init-julia-mode ()
+  (use-package julia-mode
+    :defer t
+    :init
+    (progn
+      (spacemacs/declare-prefix-for-mode 'julia-mode "ms" "send")
+      (spacemacs/declare-prefix-for-mode 'julia-mode "mh" "help")
+      (spacemacs/declare-prefix-for-mode 'julia-mode "me" "eval")
+      (spacemacs/declare-prefix-for-mode 'julia-mode "m=" "format")
+      (spacemacs/set-leader-keys-for-major-mode 'julia-mode
+        "sb" 'julia-repl-send-buffer
+        "sl" 'julia-repl-send-line
+        "sr" 'julia-repl-send-region-or-line
+        ","  'julia-repl
+        "hh" 'julia-repl-doc
+        "w"  'julia-repl-workspace
+        "em" 'julia-repl-macroexpand
+        "el" 'julia-latexsub
+        "==" 'julia-indent-line
+        )
+      )))
 
-1. A symbol, which is interpreted as a package to be installed, or
-
-2. A list of the form (PACKAGE KEYS...), where PACKAGE is the
-    name of the package to be installed or loaded, and KEYS are
-    any number of keyword-value-pairs.
-
-    The following keys are accepted:
-
-    - :excluded (t or nil): Prevent the package from being loaded
-      if value is non-nil
-
-    - :location: Specify a custom installation location.
-      The following values are legal:
-
-      - The symbol `elpa' (default) means PACKAGE will be
-        installed using the Emacs package manager.
-
-      - The symbol `local' directs Spacemacs to load the file at
-        `./local/PACKAGE/PACKAGE.el'
-
-      - A list beginning with the symbol `recipe' is a melpa
-        recipe.  See: https://github.com/milkypostman/melpa#recipe-format")
-
-
+(defun julia/init-julia-repl ()
+  (use-package julia-repl
+    :defer t
+    :init
+    (progn
+      (spacemacs/register-repl 'julia-repl 'julia-repl "julia")
+      (add-hook 'julia-mode-hook 'julia-repl)
+      (spacemacs/declare-prefix-for-mode 'julia-repl "mh" "help")
+      (spacemacs/declare-prefix-for-mode 'julia-repl "me" "eval")
+      (spacemacs/set-leader-keys-for-major-mode 'julia-repl
+        "'"  'julia-repl-edit
+        "hh" 'julia-repl-doc
+        "w"  'julia-repl-workspace
+        "em" 'julia-repl-macroexpand
+        "el" 'julia-latexsub
+        ))))
 ;;; packages.el ends here
