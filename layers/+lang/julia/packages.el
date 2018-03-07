@@ -41,7 +41,6 @@
     :init (progn
             (spacemacs/register-repl 'julia-repl 'julia-repl
                                      "julia")
-            (add-hook 'julia-mode-hook 'julia-repl)
             (spacemacs/declare-prefix-for-mode 'julia-repl
               "mh" "help")
             (spacemacs/declare-prefix-for-mode 'julia-repl
