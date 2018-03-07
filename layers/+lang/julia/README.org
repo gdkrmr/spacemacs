@@ -2,7 +2,6 @@
 
 # The maximum height of the logo should be 200 pixels.
 [[img/julia.png]]
-
 # TOC links should be GitHub style anchors.
 
 * Table of Contents                                        :TOC_4_gh:noexport:
@@ -19,6 +18,10 @@ This layer adds support for [[https://julialang.org][Julia]] to Spacemacs.
 ** Features:
   - Syntax highlighting
   - Repl support
+  - Linting
+  - Completion
+  - Jump-to-definition
+  - Documentation on hover
 
 * Install
 To use this configuration layer, add it to your =~/.spacemacs=. You will need to
