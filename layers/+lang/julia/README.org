@@ -4,6 +4,7 @@
 [[img/julia.png]]
 
 # TOC links should be GitHub style anchors.
+
 * Table of Contents                                        :TOC_4_gh:noexport:
 - [[#description][Description]]
   - [[#features][Features:]]
@@ -25,13 +26,16 @@ add =julia= to the existing =dotspacemacs-configuration-layers= list in this
 file.
 
 * Key bindings
+
 | Key Binding | Description                                          |
 |-------------+------------------------------------------------------|
 | ~SPC m h h~ | Calls ~@doc~ macro on symbol under cursor.           |
 | ~SPC m e m~ | Expands macro under cursor.                          |
 | ~SPC m w~   | Calls ~workspace()~ in Repl to give clean namespace. |
 | ~SPC e l~   | Expands latex macro (e.g. =\delta=).                 |
+
 ** Editing
+
 | Key Binding | Description                                               |
 |-------------+-----------------------------------------------------------|
 | ~SPC m s b~ | Sends buffer to REPL                                      |
@@ -40,9 +44,11 @@ file.
 | ~SPC m ,~   | Brings up Julia Repl (starts new one or focuses existing) |
 
 ** Repl
+
 | Key Binding | Description   |
 |-------------+---------------|
 | ~SPC m '~   | Edit current. |
+
 # Use GitHub URLs if you wish to link a Spacemacs documentation file or its heading.
 # Examples:
 # [[https://github.com/syl20bnr/spacemacs/blob/master/doc/VIMUSERS.org#sessions]]
