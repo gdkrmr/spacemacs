@@ -40,7 +40,9 @@
     :defer t
     :init (progn
             (spacemacs/register-repl 'julia-repl 'julia-repl
-                                     "julia")
+                                     "julia-repl")
+            (add-hook 'julia-mode-hook
+                      'julia-repl-mode)
             (spacemacs/declare-prefix-for-mode 'julia-repl
               "mh" "help")
             (spacemacs/declare-prefix-for-mode 'julia-repl
@@ -53,7 +55,7 @@
             (spacemacs/declare-prefix-for-mode 'julia-mode
               "ms" "send")
             (spacemacs/set-leader-keys-for-major-mode 'julia-mode
-              ","  'julia-repl
+              "r"  'julia-repl
               "sb" 'julia-repl-send-buffer
               "sl" 'julia-repl-send-line
               "sr" 'julia-repl-send-region-or-line

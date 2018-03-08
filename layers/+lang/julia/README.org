@@ -44,7 +44,7 @@ file.
 | ~SPC m s b~ | Sends buffer to REPL                                      |
 | ~SPC m s l~ | Sends line to REPL                                        |
 | ~SPC m s r~ | Sends region to REPL                                      |
-| ~SPC m ,~   | Brings up Julia Repl (starts new one or focuses existing) |
+| ~SPC m r~   | Brings up Julia Repl (starts new one or focuses existing) |
 
 ** Repl
 
