@@ -68,12 +68,7 @@
 (defun julia/init-lsp-julia ()
   (use-package lsp-julia
     :init (progn
-            (add-hook 'julia-mode-hook
-                      (lambda ()
-                      (spacemacs//set-lsp-timeout)
-                      ;; TODO: make lsp-ui elements configurable
-                      (lsp-julia-enable)
-                      ))
+            (add-hook 'julia-mode-hook #'lsp-julia-enable)
             (push 'xref-find-definitions spacemacs-jump-handlers-julia-mode))
     :commands lsp-julia-enable))
 

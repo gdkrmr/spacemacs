@@ -8,7 +8,3 @@
 ;; This file is not part of GNU Emacs.
 ;;
 ;;; License: GPLv3
-
-(defun spacemacs//set-lsp-timeout ()
-  "Make sure lsp doesn't timeout during julia startup"
-  (setq-local lsp-response-timeout 30))
