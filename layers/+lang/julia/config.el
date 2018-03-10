@@ -12,3 +12,9 @@
 ;; variables
 
 (spacemacs|define-jump-handlers julia-mode)
+
+(defvar julia-mode-enable-ess nil
+  "If non-nil, enable ESS in julia-mode buffers and disable julia-repl.")
+
+(defvar julia-mode-enable-lsp t
+  "If non-nil, enable lsp-mode in julia-mode buffers.")

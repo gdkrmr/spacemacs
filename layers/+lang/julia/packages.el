@@ -22,54 +22,54 @@
 (defun julia/init-julia-mode ()
   (use-package julia-mode
     :defer t
-    :init (progn
-            (spacemacs/declare-prefix-for-mode 'julia-mode
-              "mh" "help")
-            (spacemacs/declare-prefix-for-mode 'julia-mode
-              "me" "eval")
-            (spacemacs/declare-prefix-for-mode 'julia-mode
-              "m=" "format")
-            (spacemacs/set-leader-keys-for-major-mode 'julia-mode
-              "el" 'julia-latexsub
-              "==" 'julia-indent-line)
-            (spacemacs/set-leader-keys-for-major-mode 'julia-repl
-              "el" 'julia-latexsub))))
+    :init (add-hook 'julia-mode-hook #'spacemacs//julia-setup-buffer)
+    :config (progn
+              (spacemacs/declare-prefix-for-mode 'julia-mode
+                "mh" "help")
+              (spacemacs/declare-prefix-for-mode 'julia-mode
+                "me" "eval")
+              (spacemacs/declare-prefix-for-mode 'julia-mode
+                "m=" "format")
+              (spacemacs/set-leader-keys-for-major-mode 'julia-mode
+                "el" 'julia-latexsub
+                "==" 'julia-indent-line))))
 
 (defun julia/init-julia-repl ()
   (use-package julia-repl
     :defer t
     :init (progn
             (spacemacs/register-repl 'julia-repl 'julia-repl
-                                     "julia-repl")
-            (add-hook 'julia-mode-hook
-                      'julia-repl-mode)
-            (spacemacs/declare-prefix-for-mode 'julia-repl
-              "mh" "help")
-            (spacemacs/declare-prefix-for-mode 'julia-repl
-              "me" "eval")
-            (spacemacs/set-leader-keys-for-major-mode 'julia-repl
-              "'"  'julia-repl-edit
-              "hh" 'julia-repl-doc
-              "w"  'julia-repl-workspace
-              "em" 'julia-repl-macroexpand)
-            (spacemacs/declare-prefix-for-mode 'julia-mode
-              "ms" "send")
-            (spacemacs/set-leader-keys-for-major-mode 'julia-mode
-              "r"  'julia-repl
-              "sb" 'julia-repl-send-buffer
-              "sl" 'julia-repl-send-line
-              "sr" 'julia-repl-send-region-or-line
-              "'"  'julia-repl-edit
-              "hh" 'julia-repl-doc
-              "w"  'julia-repl-workspace
-              "em" 'julia-repl-macroexpand)
-            )))
+                                     "julia-repl"))
+    :config (progn
+              (spacemacs/declare-prefix-for-mode 'julia-repl
+                "mh" "help")
+              (spacemacs/declare-prefix-for-mode 'julia-repl
+                "me" "eval")
+              (spacemacs/set-leader-keys-for-major-mode
+                'julia-repl
+                "'" 'julia-repl-edit
+                "hh" 'julia-repl-doc
+                "w" 'julia-repl-workspace
+                "em" 'julia-repl-macroexpand
+                ;; this command comes from julia-mode
+                "el" 'julia-latexsub)
+              (spacemacs/declare-prefix-for-mode 'julia-mode
+                "ms" "send")
+              (spacemacs/set-leader-keys-for-major-mode
+                'julia-mode
+                "r" 'julia-repl
+                "sb" 'julia-repl-send-buffer
+                "sl" 'julia-repl-send-line
+                "sr" 'julia-repl-send-region-or-line
+                "'" 'julia-repl-edit
+                "hh" 'julia-repl-doc
+                "w" 'julia-repl-workspace
+                "em" 'julia-repl-macroexpand))))
 
 (defun julia/init-lsp-julia ()
   (use-package lsp-julia
-    :init (progn
-            (add-hook 'julia-mode-hook #'lsp-julia-enable)
-            (push 'xref-find-definitions spacemacs-jump-handlers-julia-mode))
+    :config (progn
+              (push 'xref-find-definitions spacemacs-jump-handlers-julia-mode))
     :commands lsp-julia-enable))
 
 (defun julia/post-init-company-lsp ()
