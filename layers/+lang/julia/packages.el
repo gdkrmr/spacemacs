@@ -17,6 +17,7 @@
                                  :repo "non-Jedi/lsp-julia"))
     flycheck
     company-lsp
+    ess
     ))
 
 (defun julia/init-julia-mode ()
@@ -88,4 +89,7 @@
 
 (defun julia/post-init-flycheck ()
   (spacemacs/enable-flycheck 'julia-mode))
+
+(defun julia/post-init-ess ()
+  (spacemacs/register-repl 'ess-site 'julia))
 ;;; packages.el ends here

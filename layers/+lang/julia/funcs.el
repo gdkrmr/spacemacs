@@ -22,7 +22,7 @@
   (julia-repl-mode))
 
 (defun spacemacs//julia-setup-ess ()
-  nil)
+  (add-to-list auto-mode-alist ("\\.jl\\'" . ess-julia-mode)))
 
 (defun spacemacs//julia-setup-lsp ()
   "Start lsp-mode and configure for buffer."
