@@ -13,8 +13,10 @@
 
 (spacemacs|define-jump-handlers julia-mode)
 
-(defvar julia-mode-enable-ess nil
+;; ess-mode is what the majority of people developing julia in emacs currently use
+(defvar julia-mode-enable-ess t
   "If non-nil, enable ESS in julia-mode buffers and disable julia-repl.")
 
-(defvar julia-mode-enable-lsp t
+;; disabled by default since most won't have lsp-mode working
+(defvar julia-mode-enable-lsp nil
   "If non-nil, enable lsp-mode in julia-mode buffers.")

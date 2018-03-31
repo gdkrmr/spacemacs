@@ -17,13 +17,20 @@
                                  :repo "non-Jedi/lsp-julia"))
     flycheck
     company-lsp
-    ess
     ))
 
 (defun julia/init-julia-mode ()
   (use-package julia-mode
     :defer t
-    :init (add-hook 'julia-mode-hook #'spacemacs//julia-setup-buffer)
+    :init (progn
+            (add-hook 'julia-mode-hook #'spacemacs//julia-setup-buffer)
+            (if (and (configuration-layer/layer-used-p 'ess)
+                     julia-mode-enable-ess)
+                (add-to-list 'auto-mode-alist
+                             '("\\.jl\\'" . ess-julia-mode)))
+            (if (and (not (configuration-layer/layer-used-p 'ess))
+                     julia-mode-enable-ess)
+                (message "`ess' layer is not installed. Please add `ess' layer to your dotfile.")))
     :config (progn
               (spacemacs/declare-prefix-for-mode 'julia-mode
                 "mh" "help")
@@ -58,13 +65,14 @@
                 "ms" "send")
               (spacemacs/set-leader-keys-for-major-mode
                 'julia-mode
-                "r" 'julia-repl
+                "r"  'julia-repl
+                "si" 'julia-repl
                 "sb" 'julia-repl-send-buffer
                 "sl" 'julia-repl-send-line
                 "sr" 'julia-repl-send-region-or-line
-                "'" 'julia-repl-edit
+                "'"  'julia-repl-edit
                 "hh" 'julia-repl-doc
-                "w" 'julia-repl-workspace
+                "w"  'julia-repl-workspace
                 "em" 'julia-repl-macroexpand))))
 
 (defun julia/init-lsp-julia ()
@@ -79,17 +87,8 @@
     :modes julia-mode
     :variables
     company-minimum-prefix-length 0
-    company-idle-delay 0.5)
-  (spacemacs|add-company-backends
-    :backends company-capf
-    :modes julia-repl
-    :variables
-    company-minimum-prefix-length 0
     company-idle-delay 0.5))
 
 (defun julia/post-init-flycheck ()
   (spacemacs/enable-flycheck 'julia-mode))
-
-(defun julia/post-init-ess ()
-  (spacemacs/register-repl 'ess-site 'julia))
 ;;; packages.el ends here
