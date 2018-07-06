@@ -49,12 +49,13 @@
             (spacemacs/register-repl 'julia-repl 'julia-repl
                                      "julia-repl"))
     :config (progn
-              (spacemacs/declare-prefix-for-mode 'julia-repl
+              (add-hook 'julia-repl-hook #'julia-repl-mode)
+              (spacemacs/declare-prefix-for-mode 'julia-repl-mode
                 "mh" "help")
-              (spacemacs/declare-prefix-for-mode 'julia-repl
+              (spacemacs/declare-prefix-for-mode 'julia-repl-mode
                 "me" "eval")
-              (spacemacs/set-leader-keys-for-major-mode
-                'julia-repl
+              (spacemacs/set-leader-keys-for-minor-mode
+                'julia-repl-mode
                 "'" 'julia-repl-edit
                 "hh" 'julia-repl-doc
                 "w" 'julia-repl-workspace
